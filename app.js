@@ -114,33 +114,6 @@ var renderPage = function(id, data) {
 };
 
 
-// var collapseTabHandller = function() {
-//     for (var i = 0; i < listOfToggles.length; i++) {
-//         // console.log(listOfToggles[i]);
-//         var myCollapsible = document.getElementById(listOfToggles[i])
-
-//         // myCollapsible.addEventListener('hidden.bs.collapse', function () {
-//         //     console.log('hidden');
-//         // });
-
-//         // myCollapsible.addEventListener('show.bs.collapse', function () {
-//         //     console.log('show');
-//         // });
-
-//         myCollapsible.addEventListener('shown.bs.collapse', function () {
-//             // console.log('showN');
-//             setTimeout(function() {
-//                 var nodes = myCollapsible.querySelectorAll('.' + itemClassName);
-//                 var first = nodes[0].children[0];
-//                 if (first) {
-//                     first.focus();
-//                     // console.log(first);
-//                 }
-//             }, 0); // you can adjust the delay time as needed
-//         });
-//     }
-// };
-
 var collapseTabHandller = function() {
     for (var i = 0; i < listOfToggles.length; i++) {
         var myCollapsible = document.getElementById(listOfToggles[i]);
@@ -166,7 +139,6 @@ var collapseTabHandller = function() {
         });
     }
 };
-
 
 
 
