@@ -1,7 +1,6 @@
 /* *:focus-visible, */
 *:focus {
-    outline: initial !important;
-    outline-style: solid !important;
+  outline: 4px dashed darkorange !important;
 }
 
 .list-group-item {

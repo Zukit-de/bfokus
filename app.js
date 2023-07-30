@@ -114,25 +114,60 @@ var renderPage = function(id, data) {
 };
 
 
+// var collapseTabHandller = function() {
+//     for (var i = 0; i < listOfToggles.length; i++) {
+//         // console.log(listOfToggles[i]);
+//         var myCollapsible = document.getElementById(listOfToggles[i])
+
+//         // myCollapsible.addEventListener('hidden.bs.collapse', function () {
+//         //     console.log('hidden');
+//         // });
+
+//         // myCollapsible.addEventListener('show.bs.collapse', function () {
+//         //     console.log('show');
+//         // });
+
+//         myCollapsible.addEventListener('shown.bs.collapse', function () {
+//             // console.log('showN');
+//             setTimeout(function() {
+//                 var nodes = myCollapsible.querySelectorAll('.' + itemClassName);
+//                 var first = nodes[0].children[0];
+//                 if (first) {
+//                     first.focus();
+//                     // console.log(first);
+//                 }
+//             }, 0); // you can adjust the delay time as needed
+//         });
+//     }
+// };
+
 var collapseTabHandller = function() {
     for (var i = 0; i < listOfToggles.length; i++) {
-        console.log(listOfToggles[i]);
-        var myCollapsible = document.getElementById(listOfToggles[i])
+        var myCollapsible = document.getElementById(listOfToggles[i]);
 
-        // myCollapsible.addEventListener('hidden.bs.collapse', function () {
-        //     console.log('hidden');
-        // });
+        myCollapsible.addEventListener('shown.bs.collapse', function () {
+            setTimeout(function() {
+                var nodes = myCollapsible.querySelectorAll('.' + itemClassName);
+                var first = nodes[0].children[0];
+                if (first) {
+                    first.focus();
+                }
+            }, 0); 
+        });
 
-        myCollapsible.addEventListener('show.bs.collapse', function () {
-            console.log('show');
-            var nodes = myCollapsible.querySelectorAll('.' + itemClassName);
-            var first = nodes[0];
-            // var last = nodes[nodes.length - 1];
-            first.focus();
-            console.log(first);
+        myCollapsible.addEventListener('focusout', function(e) {
+            // Check if focus is really out of the current collapse element
+            var isLeavingElement = !myCollapsible.contains(e.relatedTarget);
+            if (isLeavingElement) {
+                // Use bootstrap's collapse method to close the collapse
+                var bsCollapse = new bootstrap.Collapse(myCollapsible, {toggle: false});
+                bsCollapse.hide();
+            }
         });
     }
 };
+
+
 
 
 
