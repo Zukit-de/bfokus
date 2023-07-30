@@ -1,4 +1,6 @@
 var component = {};
+var listOfToggles = [];
+var itemClassName = 'list-group-item';
 
 // Heading component
 component.heading = function(params) {
@@ -11,7 +13,7 @@ component.heading = function(params) {
     html = '<h' + level + ' ' + ariaLabel + ' ' + 'tabindex="0">' + text + '</h' + level + '>';
     
     return html;
-}
+};
 
 // Simple Text component
 component.text = function(params) {
@@ -22,7 +24,7 @@ component.text = function(params) {
     html = '<div tabindex="0">' + text + '</div>';
     
     return html;
-}
+};
 
 // Link component
 component.link = function(params) {
@@ -34,7 +36,7 @@ component.link = function(params) {
     html = '<a href="' + href + '" class="link-body-emphasis d-inline-flex text-decoration-none rounded">' + text + '</a>';
     
     return html;
-}
+};
 
 // Link component
 component.button = function(params) {
@@ -48,12 +50,14 @@ component.button = function(params) {
     var html = '<button class="btn btn-' + style + ' d-inline-flex align-items-center" type="button">' + text + '</button>';
     
     return html;
-}
+};
 
 // Toggle component
 component.toggle = function(text, content) {
     var html = '',
         rand_id = 'id-' + Math.round(Math.random(10000, 1000000)*100) + '-collapse';
+
+    listOfToggles.push(rand_id);
     
     html += '<button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#' + rand_id + '" aria-expanded="false">';
         html += text;
@@ -67,7 +71,7 @@ component.toggle = function(text, content) {
     
     
     return html;
-}
+};
 
 
 var createPage = function(data) {
@@ -75,7 +79,7 @@ var createPage = function(data) {
 
     for (var i = 0; i < data.length; i++) {
         if (data[i] && data[i].component) {
-            html += '<li class="list-group-item">';
+            html += '<li class="' + itemClassName + '">';
                 if (data[i].component == 'text') {
                     html += component.text(data[i].params);
                 } else if (data[i].component == 'link') {
@@ -93,7 +97,7 @@ var createPage = function(data) {
     }
 
     return html;
-}
+};
 
 
 var renderPage = function(id, data) {
@@ -105,7 +109,32 @@ var renderPage = function(id, data) {
     html += '</ul>';
 
     pageElement.innerHTML = html;
-}
+
+    collapseTabHandller();
+};
+
+
+var collapseTabHandller = function() {
+    for (var i = 0; i < listOfToggles.length; i++) {
+        console.log(listOfToggles[i]);
+        var myCollapsible = document.getElementById(listOfToggles[i])
+
+        // myCollapsible.addEventListener('hidden.bs.collapse', function () {
+        //     console.log('hidden');
+        // });
+
+        myCollapsible.addEventListener('show.bs.collapse', function () {
+            console.log('show');
+            var nodes = myCollapsible.querySelectorAll('.' + itemClassName);
+            var first = nodes[0];
+            // var last = nodes[nodes.length - 1];
+            first.focus();
+            console.log(first);
+        });
+    }
+};
+
+
 
 var escapeHtml = function(unsafe) {
     return unsafe
@@ -114,4 +143,4 @@ var escapeHtml = function(unsafe) {
          .replace(/>/g, "&gt;")
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
- }
+ };

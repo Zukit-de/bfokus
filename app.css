@@ -1,4 +1,5 @@
-.btn:focus-visible {
+/* *:focus-visible, */
+*:focus {
     outline: initial !important;
     outline-style: solid !important;
 }
