@@ -2,7 +2,7 @@ var data = [
     {
         component: 'heading', // text, link, toggle, button
         params: {
-            text: 'Below are the results for <mark>"kaffeemaschinen"</mark>. Price range <mark>80 to 200 euros</mark> and 4 stars or more for the first 10 products.',
+            text: 'Below are the results for <mark tabindex="-1">"kaffeemaschinen"</mark>. Price range <mark tabindex="-1">80 to 200 euros</mark> and 4 stars or more for the first 10 products.',
             ariaLabel: 'Below are the results for "kaffeemaschinen". Price range 80 to 200 euros and 4 stars or more for the first 10 products.',
             level: 5, // 1 - 6
         },
